@@ -6,7 +6,7 @@
 package br.com.empresa.bean;
 
 import br.com.empresa.dao.ClienteDAO;
-import br.com.empresa.entidade.Cliente;
+import br.com.empresa.entidade.TbCliente;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -20,23 +20,23 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ClienteMB {
 
-	private Cliente cliente;
-	private List<Cliente> lista;
+	private TbCliente cliente;
+	private List<TbCliente> lista;
 	private ClienteDAO dao;
 
-	public Cliente getCliente() {
+	public TbCliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(TbCliente cliente) {
 		this.cliente = cliente;
 	}
 
-	public List<Cliente> getLista() {
+	public List<TbCliente> getLista() {
 		return lista;
 	}
 
-	public void setLista(List<Cliente> lista) {
+	public void setLista(List<TbCliente> lista) {
 		this.lista = lista;
 	}
 
@@ -51,7 +51,7 @@ public class ClienteMB {
 	}
 
 	public void limpar(){
-        cliente = new Cliente();
+        cliente = new TbCliente();
         
     }
 
@@ -69,13 +69,13 @@ public class ClienteMB {
 
 	}
         
-        public void deletar(Cliente item){
+        public void deletar(TbCliente item){
             dao.deletar(item.getIdClient());
             
             inicializarTela();
         }
         
-        public void carregarCliente(Cliente item){
+        public void carregarCliente(TbCliente item){
             cliente=item;
         }
 

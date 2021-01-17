@@ -5,7 +5,7 @@
  */
 package br.com.empresa.dao;
 
-import br.com.empresa.entidade.Cliente;
+import br.com.empresa.entidade.TbCliente;
 import br.com.empresa.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -16,7 +16,7 @@ import org.hibernate.Session;
  */
 public class ClienteDAO {
 
-	public void salvar(Cliente cliente) {
+	public void salvar(TbCliente cliente) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		sessao.beginTransaction();
 		sessao.persist(cliente);
@@ -25,15 +25,15 @@ public class ClienteDAO {
 
 	}
 
-	public List<Cliente> listar() {
+	public List<TbCliente> listar() {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		List<Cliente> lista = sessao.getNamedQuery("TbCliente.findAll").list();
+		List<TbCliente> lista = sessao.getNamedQuery("tb_cliente.findAll").list();
 		sessao.close();
 
 		return lista;
 	}
 
-	public void alterar(Cliente cliente) {
+	public void alterar(TbCliente cliente) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		sessao.beginTransaction();
 
@@ -48,18 +48,18 @@ public class ClienteDAO {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		sessao.beginTransaction();
 
-		sessao.delete(sessao.get(Cliente.class,id));
+		sessao.delete(sessao.get(TbCliente.class,id));
 
 		sessao.getTransaction().commit();
 		sessao.close();
 
 	}
 	
-	public Cliente pesquisarPorId(Long id) {
+	public TbCliente pesquisarPorId(Long id) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		sessao.beginTransaction();
 		
-		Cliente cliente = (Cliente) sessao.merge(sessao.get(Cliente.class,id));
+		TbCliente cliente = (TbCliente) sessao.merge(sessao.get(TbCliente.class,id));
 		sessao.getTransaction().commit();
 		sessao.close();
 
