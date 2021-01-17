@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de clientes</title>
+    </h:head>
+    <h:body>
+        <h:form id="formCadastro">
+            <p:panel header="Cadastro de clientes">
+                <p:panelGrid columns="7">
+                <p:outputLabel value="Nome : " for="nome"/>
+                <p:inputText value="#{clienteMB.cliente.nmCliente}" maxlength="45
+                             " required="true" requiredMessage="Campo nome é obrigatório"/>
+
+                <p:outputLabel value="CPF : " for="cpf"/>
+                <p:inputText value="#{clienteMB.cliente.cpfCliente}" maxlength="11"
+                             required="true" requiredMessage="Campo CPF é obrigatório"/>
+                <p:outputLabel value="Data de Nascimento : " for="data_nascimento"/>
+                <p:inputText value="#{clienteMB.cliente.aniversarioCliente}" maxlength="10"
+                             required="true" requiredMessage="Campo Data de nascimento é obrigatório"/>
+
+                <p:outputLabel value="Telefone : " for="telefone"/>
+                <p:inputText value="#{clienteMB.cliente.telefoneCliente}" maxlength="9"
+                             required="true" requiredMessage="Campo Telefone é obrigatório"/>
+
+                <p:outputLabel value="E-MAIL : " for="email"/>
+                <p:inputText value="#{clienteMB.cliente.dsEmail}" maxlength="70"
+                             required="true" requiredMessage="Campo E-MAIL é obrigatório"/>
+
+                <p:outputLabel value="Nome do pai : " for="nome_pai"/>
+                <p:inputText value="#{clienteMB.cliente.nmPaiCliente}" maxlength="70"
+                             required="true" requiredMessage="Campo nome do pai é obrigatório"/>
+
+                <p:outputLabel value="Nome da mãe : " for="nome_mae"/>
+                <p:inputText value="#{clienteMB.cliente.nmMaeCliente}" maxlength="70"
+                             required="true" requiredMessage="Campo nome da mãe é obrigatório"/>
+                <p:commandButton action="#{clienteMB.salvar()}" update="@form : formLista" />
+                <p:commandButton action="#{clienteMB.limpar()}" update="@form" process="@this" />
+
+            </p:panelGrid>
+            <h:messages/>
+            </p:panel>
+        </h:form>
+
+        <h:form id="formLista">
+            <p:dataTable var="item" value="#{clienteMB.lista}" emptyMessage="Sem registros">
+                <p:column headerText="Id">
+                        #{item.idCliente}
+                </p:column>
+                <p:column headerText="Nome">
+                        #{item.nmCliente}
+                </p:column>
+                <p:column headerText="CPF">
+                        #{item.cpfCliente}
+                </p:column>
+
+                <p:column headerText="Data de Aniversário">
+                        #{item.aniversarioCliente}
+                </p:column>
+
+                <p:column headerText="Telefone">
+                        #{item.telefoneCliente}
+                </p:column>
+                <p:column headerText="E-mail">
+                        #{item.dsEmail}
+                </p:column>
+                <p:column headerText="Nome do pai">
+                        #{item.nmPaiCliente}
+                </p:column>
+
+                <p:column headerText="Nome da mãe">
+                        #{item.nmMaeCliente}
+                </p:column>
+                
+                <p:column headerText="Ações">
+                    <p:commandButton value="Alterar" action="#{clienteBean.carregarCliente(item)}" process="@this" update=":formCadastro"/>
+                    <p:commandButton value="Excluir" action="#{clienteBean.deletar(item)}" process="@this" update="@form"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
